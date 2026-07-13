@@ -47,6 +47,7 @@ class Maze:
         while call_stack:
             print(f'call_stack: {call_stack}')
             cell = call_stack.pop()
+            # could also be this, marking the cell visited too soon
             cell.visited = True
 
             neighbors = self.grid.neighbors(cell)
