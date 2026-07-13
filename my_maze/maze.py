@@ -47,8 +47,8 @@ class Maze:
         while call_stack:
             print(f'call_stack: {call_stack}')
             cell = call_stack.pop()
-            # could also be this, marking the cell visited too soon
-            cell.visited = True
+            if not cell.visited:
+                cell.visited = True
 
             neighbors = self.grid.neighbors(cell)
             random.shuffle(neighbors)
@@ -57,7 +57,9 @@ class Maze:
             for direction, neighbor in neighbors:
                 if not neighbor.visited:
                     self.remove_walls(cell, neighbor, direction)
+                    call_stack.append(cell)
                     call_stack.append(neighbor)
+                    break
 
     def reset(self):
         for row in self.grid.cells:
