@@ -1,5 +1,4 @@
 import pygame
-
 from my_maze.maze import Maze
 from graphics.maze_graphics import MazeRenderer
 
@@ -22,6 +21,7 @@ maze.generate(0, 0)
 for r, row in enumerate(maze.grid.cells):
     for c, cell in enumerate(row):
         print(f"grid[{r}][{c}] -> cell at ({cell.row}, {cell.column})")
+
 maze.print()
 
 
