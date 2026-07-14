@@ -33,10 +33,11 @@ class Cell:
 
         # Draw walls
         if self.walls["N"]:
-            pygame.draw.line(self.screen, RED, (x, y), (x + self.cell_size, y), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y), (x + self.cell_size, y), 2)
         if self.walls["S"]:
-            pygame.draw.line(self.screen, RED, (x, y + self.cell_size), (x + self.cell_size, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y + self.cell_size), (x + self.cell_size, y + self.cell_size), 2)
         if self.walls["W"]:
-            pygame.draw.line(self.screen, RED, (x, y), (x, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y), (x, y + self.cell_size), 2)
         if self.walls["E"]:
-            pygame.draw.line(self.screen, RED, (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 2)

@@ -44,7 +44,7 @@ class Grid:
 
             for cell in row:
                 # Cell interior
-                top += "   " if not cell.walls["E"] else "   |"
+                top += "    " if not cell.walls["E"] else "   |"
 
                 # South wall
                 bottom += "---+" if cell.walls["S"] else "   +"

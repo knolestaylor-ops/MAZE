@@ -21,38 +21,18 @@ class Maze:
         neighbor.walls[opposite[direction]] = False
 
 
-        """
-        self.reset()
-        call_stack = [start]
-
-        while call_stack:
-            cell = call_stack.pop()
-            if not cell.visited:
-                cell.visited = True
-                neighbors = self.grid.neighbors(cell)
-                random.shuffle(neighbors)
-
-                for direction, neighbor in neighbors:
-                    if not neighbor.visited:
-                        self.remove_walls(cell, neighbor, direction)
-                        print(cell.row, cell.column, cell.walls)
-                        call_stack.append(neighbor)
-                        print("Neighbors of", cell.row, cell.column, ":", neighbors)
-        """
     def dfs(self, start):
         self.reset()
         call_stack = [start]
 
 
         while call_stack:
-            print(f'call_stack: {call_stack}')
             cell = call_stack.pop()
             if not cell.visited:
                 cell.visited = True
 
             neighbors = self.grid.neighbors(cell)
             random.shuffle(neighbors)
-            print(neighbors)
 
             for direction, neighbor in neighbors:
                 if not neighbor.visited:
