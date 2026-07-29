@@ -4,6 +4,21 @@ RED = (255, 0, 0)
 
 
 class Cell:
+    """
+    Individual cell class, holds information about a cell
+
+    attributes:
+    row: int, position in grid
+    column: int, position in grid
+    walls: dict, walls information
+    visited: bool, whether cell is visited
+    cell_size: int, cell size
+    color: tuple, cell color
+    screen: pygame.Surface, cell screen
+
+    """
+
+
     def __init__(self, row, column, cell_size, color, screen):
         self.row = row
         self.column = column
@@ -20,6 +35,12 @@ class Cell:
 
     def get_walls(self):
         return list(self.walls.keys())
+
+    def get_row(self):
+        return self.row
+
+    def get_column(self):
+        return self.column
 
     def get_position(self):
         return self.row, self.column

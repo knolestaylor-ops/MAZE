@@ -1,6 +1,8 @@
 import pygame
 from my_maze.maze import Maze
 from graphics.maze_graphics import MazeRenderer
+from graphics.generation_graphics import GenerationGraphics
+from solving.solver import Solver
 
 
 RED = (255, 0, 0)
@@ -11,33 +13,28 @@ SCREEN_HEIGHT = 800
 
 start_row = 0
 start_column = 0
-side_length = 160
-cell_size = 5
+side_length = 50
 running = True
 background_color = GREEN
+width, height = 800, 800
 
-width = cell_size * side_length
-height = cell_size * side_length
-
+cell_size = width // side_length
+maze = Maze(side_length, side_length, cell_size, background_color, screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)))
+maze.generate(0, 0)
 
 def init_maze():
-    maze = Maze(side_length, side_length, cell_size, background_color, screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)))
-    maze.generate(0, 0)
-
-    for r, row in enumerate(maze.grid.cells):
-        for c, cell in enumerate(row):
-            print(f"grid[{r}][{c}] -> cell at ({cell.row}, {cell.column})")
 
     maze.print()
     return maze
 
 def pygame_create_maze(maze):
     maze_renderer = MazeRenderer(maze)
+    generation_graphics = GenerationGraphics(maze, RED)
     pygame.display.set_caption("Maze")
+    route = solve_maze(maze)
 
     clock = pygame.time.Clock()
     FPS = 60
-
     running = True
 
     while running:
@@ -47,10 +44,23 @@ def pygame_create_maze(maze):
 
         maze_renderer.draw()
 
+
         pygame.display.flip()
 
         clock.tick(FPS)
     pygame.quit()
+
+def solve_maze(maze):
+    start = maze.grid.get_cell(0,0)
+    end = maze.grid.get_cell(side_length - 1,side_length - 1)
+    solver = Solver(maze, start, end)
+
+    route = solver.dfs_solve()
+    print(f"route type: {type(route)}")
+    print(route)
+    return route
+
+
 
 
 
