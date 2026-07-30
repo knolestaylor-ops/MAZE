@@ -13,7 +13,7 @@ SCREEN_HEIGHT = 800
 
 start_row = 0
 start_column = 0
-side_length = 50
+side_length = 10
 running = True
 background_color = GREEN
 width, height = 800, 800
@@ -23,7 +23,6 @@ maze = Maze(side_length, side_length, cell_size, background_color, screen = pyga
 maze.generate(0, 0)
 
 def init_maze():
-
     maze.print()
     return maze
 
@@ -37,18 +36,36 @@ def pygame_create_maze(maze):
     FPS = 60
     running = True
 
+
+    maze_renderer.draw()
+    pygame.display.flip()
+
+    route_index = 0
+    STEP_DELAY = 20
+
+    frame_count = 0
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_TAB:
+                    running = False
 
-        maze_renderer.draw()
 
+        if route_index < len(route):
+            if frame_count % STEP_DELAY == 0:
+                cell = route[route_index]
+                generation_graphics.draw_path(cell)
+                pygame.display.update()
+                route_index += 1
 
-        pygame.display.flip()
-
+        frame_count += 1
         clock.tick(FPS)
+
     pygame.quit()
+
 
 def solve_maze(maze):
     start = maze.grid.get_cell(0,0)
@@ -67,3 +84,4 @@ def solve_maze(maze):
 if __name__ == "__main__":
     pygame.init()
     pygame_create_maze(init_maze())
+

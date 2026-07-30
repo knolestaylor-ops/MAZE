@@ -33,6 +33,11 @@ class Cell:
         self.color = color
         self.screen = screen
 
+    def __str__(self):
+        return f"row: {self.row}, column: {self.column}, walls: {self.walls}"
+
+    __repr__ = __str__
+
     def get_walls(self):
         return list(self.walls.keys())
 
@@ -54,11 +59,11 @@ class Cell:
 
         # Draw walls
         if self.walls["N"]:
-            pygame.draw.line(self.screen, (0,0,0), (x, y), (x + self.cell_size, y), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y), (x + self.cell_size, y), 5)
         if self.walls["S"]:
-            pygame.draw.line(self.screen, (0,0,0), (x, y + self.cell_size), (x + self.cell_size, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y + self.cell_size), (x + self.cell_size, y + self.cell_size), 5)
         if self.walls["W"]:
-            pygame.draw.line(self.screen, (0,0,0), (x, y), (x, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y), (x, y + self.cell_size), 5)
         if self.walls["E"]:
-            pygame.draw.line(self.screen, (0,0,0), (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 2)
-            pygame.draw.line(self.screen, (0,0,0), (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 5)
+

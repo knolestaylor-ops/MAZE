@@ -22,6 +22,7 @@ class Maze:
         self.screen = screen
         self.color = color
         self.cell_size = cell_size
+        self.screen = screen
 
     def generate(self, start_row, start_column):
         # picks starting cell and starts dfs

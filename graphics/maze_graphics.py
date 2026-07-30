@@ -1,10 +1,7 @@
-import pygame
-
 
 
 class MazeRenderer:
     def __init__(self, maze):
-        pygame.init()
         self.maze = maze
         self.width = maze.width
         self.height = maze.height
@@ -16,4 +13,3 @@ class MazeRenderer:
         for row in self.maze.grid:
             for cell in row:
                 cell.draw()
-        pygame.display.flip()

@@ -12,12 +12,13 @@ maze, current maze state
 class GenerationGraphics:
     def __init__(self, maze,  color):
         self.maze = maze
+        self.screen = maze.screen
         self.grid = maze.grid
         self.color = color
 
-    def draw_path(self, path):
-        cell_size = self.maze.cell_size
-        for cell in path:
-            x = cell.get_column() * cell_size
-            y = cell.get_row() * cell_size
-            pygame.draw.rect(self.maze.screen, self.color, (x, y, cell_size , cell_size ))
+    def draw_path(self, cell):
+        padding = 3
+        cell_size = cell.cell_size
+        x = cell.get_column() * cell_size
+        y = cell.get_row() * cell_size
+        pygame.draw.rect(self.screen, self.color,(x + padding, y + padding, cell_size - 2 * padding, cell_size - 2 * padding))

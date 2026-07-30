@@ -1,5 +1,5 @@
 """
-Maze solving class, will allow you to select a solving algorithm, and then complete it"
+Maze solving class, will allow you to select a solving algorithm, and then complete it
 
 attributes:
 maze: maze object, holds the current maze state
@@ -9,6 +9,8 @@ algorithm: what algorithm is being used to solve
 
 
 """
+import random
+
 
 class Solver:
     def __init__(self, maze, start, end):
@@ -19,35 +21,35 @@ class Solver:
 
 
     def dfs_solve(self):
-
         came_from = {self.start: None}
-        visited = {self.start}
         call_stack = [self.start]
 
         while call_stack:
-            cell = call_stack.pop()
+            current = call_stack[-1]
 
-            if cell == self.end:
+            if current == self.end:
                 return self.reconstruct_path(came_from)
 
-            neighbors = self.maze.grid.neighbors(cell)
+            open_passages = self.maze.grid.clear_cells(current)
 
-            for direction, neighbor in neighbors:
-                if neighbor not in visited:
-                    visited.add(neighbor)
-                    came_from[neighbor] = cell
-                    call_stack.append(neighbor)
+            if open_passages:
+                direction, passage = random.choice(open_passages)
+                passage.visited = True
+                call_stack.append(passage)
+                came_from[passage] = current
+            else:
+                call_stack.pop()
+                came_from.pop(current, None)
         return None
 
-    def reconstruct_path(self, came_from):
+    @staticmethod
+    def reconstruct_path(came_from):
         path = []
-        current = self.end
 
-        while current:
-            path.append(current)
-            current = came_from[current]
+        for cell in came_from:
+            path.append(cell)
 
-        path.reverse()
+        print(path)
         return path
 
 

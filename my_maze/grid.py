@@ -17,6 +17,7 @@ class Grid:
         self.height = height
         self.width = width
         self.cell_size = cell_size
+        self.screen = screen
 
     def __iter__(self):
         return iter(self.cells)
@@ -39,6 +40,22 @@ class Grid:
         if  cell.walls["W"] and column > 0:
             result.append(("W", (self.cells[row][column-1])))
         if  cell.walls["E"] and column < self.width - 1:
+            result.append(("E", (self.cells[row][column+1])))
+
+        return result
+
+    def clear_cells(self, cell):
+        row = cell.row
+        column = cell.column
+        result = []
+
+        if not cell.walls["N"] and row > 0:
+            result.append(("N", (self.cells[row-1][column])))
+        if not cell.walls["S"] and row < self.height - 1:
+            result.append(("S", (self.cells[row+1][column])))
+        if not cell.walls["W"] and column > 0:
+            result.append(("W", (self.cells[row][column-1])))
+        if not cell.walls["E"] and column < self.width - 1:
             result.append(("E", (self.cells[row][column+1])))
 
         return result
