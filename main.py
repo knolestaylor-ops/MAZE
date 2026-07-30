@@ -41,7 +41,7 @@ def pygame_create_maze(maze):
     pygame.display.flip()
 
     route_index = 0
-    STEP_DELAY = 20
+    STEP_DELAY = 5
 
     frame_count = 0
 
