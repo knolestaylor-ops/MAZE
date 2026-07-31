@@ -4,6 +4,21 @@ RED = (255, 0, 0)
 
 
 class Cell:
+    """
+    Individual cell class, holds information about a cell
+
+    attributes:
+    row: int, position in grid
+    column: int, position in grid
+    walls: dict, walls information
+    visited: bool, whether cell is visited
+    cell_size: int, cell size
+    color: tuple, cell color
+    screen: pygame.Surface, cell screen
+
+    """
+
+
     def __init__(self, row, column, cell_size, color, screen):
         self.row = row
         self.column = column
@@ -21,6 +36,12 @@ class Cell:
     def get_walls(self):
         return list(self.walls.keys())
 
+    def get_row(self):
+        return self.row
+
+    def get_column(self):
+        return self.column
+
     def get_position(self):
         return self.row, self.column
 
@@ -33,10 +54,11 @@ class Cell:
 
         # Draw walls
         if self.walls["N"]:
-            pygame.draw.line(self.screen, RED, (x, y), (x + self.cell_size, y), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y), (x + self.cell_size, y), 2)
         if self.walls["S"]:
-            pygame.draw.line(self.screen, RED, (x, y + self.cell_size), (x + self.cell_size, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y + self.cell_size), (x + self.cell_size, y + self.cell_size), 2)
         if self.walls["W"]:
-            pygame.draw.line(self.screen, RED, (x, y), (x, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x, y), (x, y + self.cell_size), 2)
         if self.walls["E"]:
-            pygame.draw.line(self.screen, RED, (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 2)
+            pygame.draw.line(self.screen, (0,0,0), (x + self.cell_size, y), (x + self.cell_size, y + self.cell_size), 2)
